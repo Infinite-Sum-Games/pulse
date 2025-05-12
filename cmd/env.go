@@ -14,11 +14,17 @@ import (
 var EnvVars *EnvConfig
 
 type EnvConfig struct {
-	Environment  string
-	Port         int
-	Domain       string
-	CookieSecure bool
-	DBUrl        string
+	Environment        string
+	Port               int
+	Domain             string
+	CookieSecure       bool
+	DBUrl              string
+
+	EmailAppPassword   string
+
+	GithubClientId string
+	GithubClientSecret string
+	GithubRedirectUri  string
 }
 
 func NewEnvConfig() (*EnvConfig, error) {
@@ -35,6 +41,10 @@ func NewEnvConfig() (*EnvConfig, error) {
 	domain := os.Getenv("DOMAIN")
 	cookieSecure := os.Getenv("COOKIE_SECURE")
 	dbUrl := os.Getenv("DATABASE_URL")
+	emailAppPassword := os.Getenv("EMAIL_APP_PASSWORD")
+	githubClientId := os.Getenv("GITHUB_CLIENT_ID")
+	githubClientSecret := os.Getenv("GITHUB_CLIENT_SECRET")
+	githubRedirectUri := os.Getenv("GITHUB_REDIRECT_URI")
 
 	environment = strings.ToLower(environment)
 	isValid := slices.Contains(validEnvs, environment)
@@ -66,6 +76,22 @@ func NewEnvConfig() (*EnvConfig, error) {
 		return nil, fmt.Errorf("DATABASE_URL environment variable is missing.")
 	}
 	cfg.DBUrl = dbUrl
+	if emailAppPassword == "" {
+		return nil, fmt.Errorf("EMAIL_APP_PASSWORD environment variable is missing.")
+	}
+	cfg.EmailAppPassword = emailAppPassword
+	if githubClientId == "" {
+		return nil, fmt.Errorf("GITHUB_CLIENT_ID environment variable is missing.")
+	}
+	cfg.GithubClientId = githubClientId
+	if githubClientSecret == "" {
+		return nil, fmt.Errorf("GITHUB_CLIENT_SECRET environment variable is missing.")
+	}
+	cfg.GithubClientSecret = githubClientSecret
+	if githubRedirectUri == "" {
+		return nil, fmt.Errorf("GITHUB_REDIRECT_URI environment variable is missing.")
+	}
+	cfg.GithubRedirectUri = githubRedirectUri
 
 	return cfg, nil
 }

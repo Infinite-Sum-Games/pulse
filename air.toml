@@ -1,0 +1,14 @@
+# Working directory
+root = "."
+
+# Temporary directory for builds
+tmp_dir = "bin"
+
+[build]
+  cmd = "go build -o ./bin/pulse.exe ."
+  bin = "./bin/pulse.exe"
+  full_bin = "go run main.go"
+  include_ext = ["go", "html", "tpl", "tmpl"]
+
+[log]
+  level = "debug"

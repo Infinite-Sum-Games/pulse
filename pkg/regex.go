@@ -13,8 +13,8 @@ var Rex = &RegExps{}
 
 func InitRegex() error {
 
-	// Regular expression for FirstName, MiddlName, LastName
-	nameRegex, err := regexp.Compile(`/^[a-zA-Z]+$/`)
+	// Regular expression for FirstName, MiddleName, LastName
+	nameRegex, err := regexp.Compile(`^[a-zA-Z]+$`)
 	if err != nil {
 		return err
 	}
@@ -28,7 +28,7 @@ func InitRegex() error {
 	Rex.OtpRegex = otpRegex
 
 	// Regular express for Passwords
-	pwdRegex, err := regexp.Compile(`/^[a-zA-Z0-9_.]+$/`)
+	pwdRegex, err := regexp.Compile(`^[a-zA-Z0-9_.]+$`)
 	if err != nil {
 		return err
 	}

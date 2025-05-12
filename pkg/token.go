@@ -39,7 +39,7 @@ func InitPaseto() error {
 	}
 	privateKeyHex := hex.EncodeToString(privateKeyBinary)
 
-	publicKeyBinary, err := os.ReadFile("app.pub.rsa")
+	publicKeyBinary, err := os.ReadFile("app.rsa.pub")
 	if err != nil {
 		return err
 	}
@@ -103,6 +103,10 @@ func CreateTempToken(username, email string) string {
 	token.SetNotBefore(time.Now())
 	token.SetExpiration(time.Now().Add(TempTokenValidTime))
 	token.SetSubject("temp_token")
+
+	// for key, value := range additionalData {
+	// 	token.Set(key, value)
+	// }
 
 	signed := token.V4Sign(SignKey, nil)
 	return signed

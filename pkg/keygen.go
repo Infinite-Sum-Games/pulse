@@ -9,7 +9,7 @@ import (
 
 func CheckRSAKeyPairExists() error {
 	privateKeyPath := "app.rsa"
-	publicKeyPath := "app.pub.rsa"
+	publicKeyPath := "app.rsa.pub"
 	if _, err := os.Stat(privateKeyPath); err != nil {
 		return err
 	}
@@ -29,7 +29,7 @@ func GenerateRSAKeyPair() error {
 	if err := os.WriteFile("app.rsa", privateKey.ExportBytes(), 0644); err != nil {
 		return fmt.Errorf("Error saving private key: %w", err)
 	}
-	if err := os.WriteFile("app.pub.rsa", publicKey.ExportBytes(), 0644); err != nil {
+	if err := os.WriteFile("app.rsa.pub", publicKey.ExportBytes(), 0644); err != nil {
 		return fmt.Errorf("error saving public key: %w", err)
 	}
 	return nil
